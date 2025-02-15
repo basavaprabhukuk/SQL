@@ -1,5 +1,4 @@
---Question
-
+--Question: Find customers who have bought all products at least once.
 -- Create Products Table
 CREATE TABLE Products (
     Product_ID INT PRIMARY KEY,
