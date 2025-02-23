@@ -1,0 +1,25 @@
+Find total games played & won by each team.
+🔸 Match Results:
+Team1 | Team2 | Winner 
+A   | B   | A 
+B   | A   | A 
+C   | D   | D 
+
+Expected Output:
+| Team | Played | Won |
+|------|--------|-----|
+| A  | 2   | 2  |
+| B  | 2   | 0  |
+| C  | 1   | 0  |
+| D  | 1   | 1  |
+
+CREATE TABLE MatchResults (
+    Team1 VARCHAR(10),
+    Team2 VARCHAR(10),
+    Winner VARCHAR(10)
+);
+
+INSERT INTO MatchResults (Team1, Team2, Winner) VALUES
+('A', 'B', 'A'),
+('B', 'A', 'A'),
+('C', 'D', 'D');

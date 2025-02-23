@@ -1,0 +1,34 @@
+/*
+You are working for an e-commerce platform that tracks customer transactions. You are given a dataset containing customer_id, purchase_date, product_id, and quantity. The platform wants to analyze repeat purchases. Your task is to identify the customers who bought the same product on more than one occasion within a 30-day window.
+
+-- Create the table
+CREATE TABLE purchases (
+    customer_id INT,
+    purchase_date DATE,
+    product_id INT,
+    quantity INT
+);
+
+-- Insert the data
+INSERT INTO purchases (customer_id, purchase_date, product_id, quantity) VALUES
+(101, '2024-01-01', 201, 2),
+(101, '2024-01-15', 201, 3),
+(102, '2024-01-02', 202, 1),
+(103, '2024-02-05', 203, 5),
+(103, '2024-02-10', 203, 2),
+(101, '2024-03-01', 201, 1);
+ 
+
+*/
+
+Solution
+
+select p1.*, p2.purchase_date 
+
+ from purchases p1 
+inner join purchases p2
+on p1.customer_id = p2.customer_id
+and p1.product_id = p2.product_id
+and p1.purchase_date < p2.purchase_date
+and DATEDIFF(dd, p1.purchase_date , p2.purchase_date) <= 30
+ 

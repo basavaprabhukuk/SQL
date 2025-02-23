@@ -1,0 +1,54 @@
+/* Forward filling values
+
+You are given a dataset with date, product_id, and sales_qty. Some rows contain null values for sales_qty. You are asked to forward-fill the missing values with the last non-null value per product_id in time order
+
+Note: Do not use any in-built functions
+
+data = [
+
+("2024-01-01", 101, 10),
+
+("2024-01-02", 101, None),
+
+("2024-01-03", 101, 15),
+
+("2024-01-01", 102, 20),
+
+("2024-01-02", 102, None),
+
+("2024-01-03", 102, None),
+
+]
+
+columns = ["date", "product_id", "sales_qty"]
+
+ Create the table
+CREATE TABLE sales_data (
+    date DATE,
+    product_id INT,
+    sales_qty INT
+);
+
+-- Insert the data
+INSERT INTO sales_data (date, product_id, sales_qty) VALUES
+('2024-01-01', 101, 10),
+('2024-01-02', 101, NULL),
+('2024-01-03', 101, 15),
+('2024-01-01', 102, 20),
+('2024-01-02', 102, NULL),
+('2024-01-03', 102, NULL);
+
+
+*/
+
+select * from temp_sales_not_null
+union all
+SELECT sd.date,sd.product_id, (
+  Select max(sales_qty) 
+  from sales_data t
+where t.sales_qty is not null and t.product_id = sd.product_id and t.date <= sd.date
+
+) as s_qty
+	FROM 
+    sales_data sd
+    where sd.sales_qty is null 
